@@ -1,0 +1,27 @@
+<!-- 配置 SK 弹窗（taskList / taskCreate 共用）：对话生成与语音合成双密钥，密文显示 -->
+<div class="modal fade" id="skModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="bi bi-key"></i> 配置 API Key</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">对话生成 API Key</label>
+                    <input type="password" class="form-control" id="chatKeyInput" placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+                    <div class="form-text">用于分章、生成幻灯片与讲解稿（step-3.7-flash），仅保存在本机浏览器{% if server_sk %}<br>服务器已配置默认密钥：可留空，留空则使用服务器密钥{% endif %}</div>
+                </div>
+                <div class="mb-1">
+                    <label class="form-label">语音合成 API Key</label>
+                    <input type="password" class="form-control" id="ttsKeyInput" placeholder="xxxxxxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+                    <div class="form-text">用于 Step5 语音合成（mimo-v2.5-tts），仅保存在本机浏览器{% if server_mimo_sk %}<br>服务器已配置默认密钥：可留空，留空则使用服务器密钥{% endif %}</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="saveSK()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

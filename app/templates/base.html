@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 宽松版 CSP（方案 3.3-A）：内联事件/样式暂存，严格版列入长期重构 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self'; media-src 'self' blob:; connect-src 'self'; script-src 'self' 'unsafe-inline'; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <title>{% block title %}课映{% endblock %}</title>
+    <link href="/static/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendor/icons/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="/static/css/style.css?v={{ static_v }}" rel="stylesheet">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <script>
+        window.SERVER_SK = {{ 'true' if server_sk else 'false' }};
+        window.SERVER_MIMO_SK = {{ 'true' if server_mimo_sk else 'false' }};
+        window.TTS_VOICES = {{ tts_voices | tojson }};
+        window.TTS_VOICE_DEFAULT = {{ tts_voice_default | tojson }};
+    </script>
+    <!-- 移动端顶栏 -->
+    <nav class="navbar navbar-dark d-lg-none" id="mobileTopbar">
+        <div class="container-fluid">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <span class="navbar-brand mb-0 h6">课映</span>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- 桌面端侧边栏 -->
+        <nav class="sidebar d-none d-lg-flex flex-column">
+            <div class="sidebar-title">课映</div>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/taskList" id="nav-taskList">
+                        <i class="bi bi-list-task"></i> 任务列表
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 移动端侧边栏 (Offcanvas) -->
+        <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="sidebarOffcanvas" aria-labelledby="sidebarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="sidebarLabel">课映</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/taskList" onclick="closeOffcanvas()">
+                            <i class="bi bi-list-task"></i> 任务列表
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script src="/static/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/static/js/common.js?v={{ static_v }}"></script>
+    <script>
+    function closeOffcanvas() {
+        const el = document.getElementById('sidebarOffcanvas');
+        const offcanvas = bootstrap.Offcanvas.getInstance(el);
+        if (offcanvas) offcanvas.hide();
+    }
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

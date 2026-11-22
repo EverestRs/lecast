@@ -1,0 +1,23 @@
+# 运行时依赖（版本锁定至 2026-08 实测通过的组合）
+
+# Web 框架
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+python-multipart==0.0.32
+
+# 数据层
+SQLAlchemy==2.0.51
+
+# 模板与数据校验
+Jinja2==3.1.6
+pydantic==2.11.7
+
+# LLM / TTS HTTP 客户端
+httpx==0.28.1
+
+# 幻灯片截图与导出
+playwright==1.62.0
+python-pptx==1.0.2
+
+# 脚本控制台输出
+rich==15.0.0

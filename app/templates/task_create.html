@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}任务详情 - 课映{% endblock %}
+
+{% block head %}
+<link href="/static/vendor/plyr/plyr.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+        <a href="/taskList" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left"></i> 返回首页
+        </a>
+        <button class="btn btn-outline-secondary btn-sm js-config-sk" onclick="configSK()">
+            <i class="bi bi-key"></i> <span class="sk-btn-text">配置 SK</span>
+        </button>
+    </div>
+</div>
+
+<!-- 步骤导航 -->
+<div class="steps-nav-wrap">
+    <div class="steps-nav" id="stepsNav">
+        <div class="step-item" data-step="0" onclick="jumpToStep(0)" role="button" tabindex="0">
+            <div class="step-circle">1</div>
+            <div class="step-label">选择课件</div>
+            <div class="step-desc">上传 Markdown 文件</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="1" onclick="jumpToStep(1)" role="button" tabindex="0">
+            <div class="step-circle">2</div>
+            <div class="step-label">生成章节</div>
+            <div class="step-desc">自动划分逻辑章节</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="2" onclick="jumpToStep(2)" role="button" tabindex="0">
+            <div class="step-circle">3</div>
+            <div class="step-label">生成幻灯片</div>
+            <div class="step-desc">每章生成 HTML 页面</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="3" onclick="jumpToStep(3)" role="button" tabindex="0">
+            <div class="step-circle">4</div>
+            <div class="step-label">生成讲解稿</div>
+            <div class="step-desc">口语化逐章讲解文本</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="4" onclick="jumpToStep(4)" role="button" tabindex="0">
+            <div class="step-circle">5</div>
+            <div class="step-label">生成音频</div>
+            <div class="step-desc">TTS 合成语音</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="step-item" data-step="5" onclick="jumpToStep(5)" role="button" tabindex="0">
+            <div class="step-circle">6</div>
+            <div class="step-label">导出视频</div>
+            <div class="step-desc">合成最终 MP4</div>
+        </div>
+    </div>
+    <div class="step-progress" id="stepProgress">第 1 / 6 步</div>
+</div>
+
+<!-- 步骤内容 -->
+<div class="step-content card mt-4">
+    <div class="card-body" id="stepContent">
+        <!-- 由 JS 动态渲染 -->
+    </div>
+</div>
+
+<!-- 底部按钮 -->
+<div class="step-footer mt-3 d-flex justify-content-between">
+    <button class="btn btn-outline-secondary" id="prevBtn" onclick="prevStep()" disabled>
+        <i class="bi bi-chevron-left"></i> 上一步
+    </button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+        {% if task_id %}下一步{% else %}开始生成 <i class="bi bi-chevron-right"></i>{% endif %}
+    </button>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/vendor/plyr/plyr.js"></script>
+<script src="/static/js/task_create.js?v={{ static_v }}"></script>
+<script src="/static/js/task_create_steps.js?v={{ static_v }}"></script>
+{% include "partials/sk_modal.html" %}
+{% endblock %}

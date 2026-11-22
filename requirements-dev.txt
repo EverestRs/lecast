@@ -1,0 +1,4 @@
+# 开发/测试依赖（含运行时依赖）
+-r requirements.txt
+
+pytest==9.1.1

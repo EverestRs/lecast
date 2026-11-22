@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}登录 - 课映{% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
+    <div class="card shadow-sm" style="width: 360px;">
+        <div class="card-body p-4">
+            <h5 class="card-title text-center mb-3"><i class="bi bi-shield-lock"></i> 访问口令</h5>
+            {% if error %}
+            <div class="alert alert-danger py-2">{{ error }}</div>
+            {% endif %}
+            <form method="post" action="/login">
+                <input type="hidden" name="next" value="{{ next }}">
+                <div class="mb-3">
+                    <label class="form-label">请输入站点访问口令</label>
+                    <input type="password" class="form-control" name="token" autofocus autocomplete="current-password">
+                    <div class="form-text">由部署者在服务端通过 APP_ACCESS_TOKEN 环境变量设置</div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">进入</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
