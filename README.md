@@ -14,6 +14,14 @@ python run.py            # 浏览器打开 http://127.0.0.1:8000/taskList
 
 ---
 
+## 效果预览
+
+![课映 Lecast：Markdown 课件 → 有声教学视频](assets/preview.gif)
+
+*演示流程：任务列表 → 导出视频页 → 成片播放（封面 / 六步流水线 / 技术架构），演示素材见 `assets/demo_lesson.md`*
+
+---
+
 ## 功能特性
 
 ### 6 步自动化流水线
